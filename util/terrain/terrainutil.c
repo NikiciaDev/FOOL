@@ -1,0 +1,40 @@
+//
+// Created by LRieh on 19/10/2025.
+//
+
+#include "terrainutil.h"
+#include "../random/randomutil.h"
+
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+
+void generate_terrain(int* height_map, int height_map_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu) {
+    memset(height_map, 0, sizeof(int) * height_map_size);
+    printf("Generating terrain...\n");
+
+    for(int i = 0; i < samples; i++) {
+        short pow2 = pow(2, i);
+        if(i == 0) pow2 = 1;
+
+        for(int j = 0; j < height_map_size / pow2; j++) {
+            for(int k = 0; k < pow2; k++) {
+                if(j * pow2 + k >= height_map_size) continue;
+                height_map[j * pow2 + k] += (1.f / pow2) * rand_int(0, max_height);
+            }
+        }
+    }
+
+    for(int i = 1; i < height_map_size - 1; i++) {
+        height_map[i] = interpolator(height_map[i - 1], height_map[i + 1], mu);
+    }
+
+    float actual_max = 0;
+    for(int i = 0; i < height_map_size; i++) {
+        if(height_map[i] > actual_max) actual_max = height_map[i];
+    }
+
+    for(int i = 0; i < height_map_size; i++) {
+        height_map[i] = (height_map[i] / actual_max) * max_height;
+    }
+}
