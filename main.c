@@ -11,15 +11,15 @@ int main()
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     //SetConfigFlags(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "FOOL");
+    SetTargetFPS(60);
 
     RenderTexture2D target = LoadRenderTexture(TEXTURE_WIDTH, TEXTURE_HEIGHT);
     SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
 
-    SetTargetFPS(60);
-
     const int ARRAY_SIZE = 256;
     int terrain[ARRAY_SIZE];
     generate_terrain(terrain, ARRAY_SIZE, 10, 900, &cosip, 0.5f);
+
     while (!WindowShouldClose())
     {
         BeginTextureMode(target);
