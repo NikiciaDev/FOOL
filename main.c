@@ -4,8 +4,6 @@
 
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
     const int TEXTURE_WIDTH = 1920;
     const int TEXTURE_HEIGHT = 1080;
     const int WINDOW_WIDTH = 1920 / 2;
