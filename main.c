@@ -1,11 +1,10 @@
 #include "raylib.h"
+#include "globals.h"
 #include "util/math/mathutil.h"
 #include "util/terrain/terrainutil.h"
 
 int main()
 {
-    const int TEXTURE_WIDTH = 1920;
-    const int TEXTURE_HEIGHT = 1080;
     const int WINDOW_WIDTH = 1920 / 2;
     const int WINDOW_HEIGHT = 1080 / 2;
 
@@ -26,7 +25,7 @@ int main()
         BeginTextureMode(target);
         ClearBackground(DARKBLUE);
 
-        draw_terrain(terrain, ARRAY_SIZE, TEXTURE_WIDTH, TEXTURE_HEIGHT, true);
+        draw_terrain(terrain, ARRAY_SIZE, true);
 
         EndTextureMode();
 

@@ -5,6 +5,9 @@
 #ifndef FOOL_GLOBALS_H
 #define FOOL_GLOBALS_H
 
-#define g 9.81f
+extern const float G;
+
+extern const int TEXTURE_WIDTH;
+extern const int TEXTURE_HEIGHT;
 
 #endif //FOOL_GLOBALS_H

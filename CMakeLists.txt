@@ -19,6 +19,8 @@ add_executable(FOOL main.c
         util/math/mathutil.h
         globals.h
         entity/base/base.h
+        entity/base/base.c
+        globals.c
 )
 
 # Link raylib (which you built from source)
