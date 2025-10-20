@@ -2,8 +2,8 @@
 // Created by LRieh on 20/10/2025.
 //
 
-#ifndef FOOL_BASE_H
-#define FOOL_BASE_H
+#ifndef FOOL_BALL_H
+#define FOOL_BALL_H
 
 typedef struct Ball {
     float x, y;
@@ -21,11 +21,4 @@ void update_ball(Ball* ball, int* terrain, int terrain_size, float delta_time);
 
 void draw_ball(Ball* ball);
 
-typedef struct Rect {
-    float x, y;
-    float width, height;
-} Rect;
-
-Rect createRect(float x, float y, float width, float height);
-
-#endif //FOOL_BASE_H
+#endif //FOOL_BALL_H

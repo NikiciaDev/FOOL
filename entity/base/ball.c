@@ -2,7 +2,7 @@
 // Created by LRieh on 20/10/2025.
 //
 
-#include "base.h"
+#include "ball.h"
 #include "raylib.h"
 #include "../../globals.h"
 #include "../../util/terrain/terrainutil.h"
@@ -48,13 +48,4 @@ void update_ball(Ball* ball, int* terrain, int terrain_size, float delta_time) {
 
 void draw_ball(Ball* ball) {
     DrawCircle(ball->x, ball->y, ball->radius, WHITE);
-}
-
-Rect createRect(float x, float y, float width, float height) {
-    Rect rect;
-    rect.x = x;
-    rect.y = y;
-    rect.width = width;
-    rect.height = height;
-    return rect;
 }

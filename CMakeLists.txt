@@ -18,8 +18,8 @@ add_executable(FOOL main.c
         util/math/mathutil.c
         util/math/mathutil.h
         globals.h
-        entity/base/base.h
-        entity/base/base.c
+        entity/base/ball.h
+        entity/base/ball.c
         globals.c
 )
 
