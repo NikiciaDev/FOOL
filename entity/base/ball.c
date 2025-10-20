@@ -7,14 +7,15 @@
 #include "../../globals.h"
 #include "../../util/terrain/terrainutil.h"
 
-Ball create_ball(float x, float y, float vx, float vy, float radius, float mass, float bounciness) {
+const float DEFAULT_BOUNCINESS = 0.2f;
+
+Ball create_ball(float x, float y, float vx, float vy, float radius, float bounciness) {
     Ball ball;
     ball.x = x;
     ball.y = y;
     ball.vx = vx;
     ball.vy = vy;
     ball.radius = radius;
-    ball.mass = mass;
     ball.bounciness = bounciness;
 
     ball.draw = &draw_ball;
@@ -46,6 +47,6 @@ void update_ball(Ball* ball, int* terrain, int terrain_size, float delta_time) {
     }
 }
 
-void draw_ball(Ball* ball) {
-    DrawCircle(ball->x, ball->y, ball->radius, WHITE);
+void draw_ball(Ball* self) {
+    DrawCircle(self->x, self->y, self->radius, WHITE);
 }

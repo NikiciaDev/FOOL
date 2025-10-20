@@ -12,7 +12,7 @@ int main()
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     //SetConfigFlags(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "FOOL");
-    SetTargetFPS(60);
+    SetTargetFPS(240);
 
     RenderTexture2D target = LoadRenderTexture(TEXTURE_WIDTH, TEXTURE_HEIGHT);
     SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
@@ -21,14 +21,18 @@ int main()
     int terrain[ARRAY_SIZE];
     generate_terrain(terrain, ARRAY_SIZE, 3, 900, &cosip, 0.5f);
 
-    create_ball(100, 0, 10, 0, 3, 4, 1);
+    Ball ball = create_ball(100, 0, 10, 0, 8, DEFAULT_BOUNCINESS);
 
     while (!WindowShouldClose())
     {
+        update_ball(&ball, terrain, ARRAY_SIZE, GetFrameTime());
+
         BeginTextureMode(target);
         ClearBackground(DARKBLUE);
 
         draw_terrain(terrain, ARRAY_SIZE, true);
+        draw_ball(&ball);
+
 
         EndTextureMode();
 
