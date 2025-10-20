@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../math/mathutil.h"
+
 void generate_terrain(int* terrain, int terrain_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu) {
     memset(terrain, 0, sizeof(int) * terrain_size);
     printf("Generating terrain...\n");
@@ -63,4 +65,41 @@ void draw_terrain(int* terrain, int terrain_size, bool debug) {
 
         if(debug) DrawCircle(i * xStep, terrain[i], 4, RED);
     }
+}
+
+float get_terrain_height_at(int* terrain, int terrain_size, float x) {
+    float x_step = (float)TEXTURE_WIDTH / (terrain_size - 1);
+    int segment = x / x_step;
+
+    if (segment < 0) segment = 0;
+    if (segment >= terrain_size - 1) segment = terrain_size - 2;
+
+    float x1 = segment * x_step;
+    float x2 = (segment + 1) * x_step;
+    float y1 = terrain[segment];
+    float y2 = terrain[segment + 1];
+
+    return lerp(x, x1, y1, x2, y2);
+}
+
+Vector2 get_terrain_normal_at(int* terrain, int terrain_size, float x) {
+    float x_step = (float)TEXTURE_WIDTH / (terrain_size - 1);
+    int segment = x / x_step;
+
+    if (segment < 0) segment = 0;
+    if (segment >= terrain_size - 1) segment = terrain_size - 2;
+
+    float x1 = segment * x_step;
+    float x2 = (segment + 1) * x_step;
+    float y1 = terrain[segment];
+    float y2 = terrain[segment + 1];
+
+    Vector2 tangent = {x2 - x1, y2 - y1};
+    float length = sqrt(tangent.x * tangent.x + tangent.y * tangent.y);
+    tangent.x /= length;
+    tangent.y /= length;
+
+    Vector2 normal = {-tangent.y, tangent.x};
+
+    return normal;
 }
