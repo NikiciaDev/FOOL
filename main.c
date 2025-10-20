@@ -35,14 +35,14 @@ int main()
         float scaleY = (float)GetScreenHeight() / TEXTURE_HEIGHT;
         float scale = (scaleX < scaleY) ? scaleX : scaleY; // Maintain aspect ratio
 
-        int scaledWidth = (int)(TEXTURE_WIDTH * scale);
-        int scaledHeight = (int)(TEXTURE_HEIGHT * scale);
-        int offsetX = (GetScreenWidth() - scaledWidth) / 2;
-        int offsetY = (GetScreenHeight() - scaledHeight) / 2;
+        int scaled_width = (int)(TEXTURE_WIDTH * scale);
+        int scaled_height = (int)(TEXTURE_HEIGHT * scale);
+        int offset_x = (GetScreenWidth() - scaled_width) / 2;
+        int offset_y = (GetScreenHeight() - scaled_height) / 2;
 
         // Flip vertically cuz opengl weird
         Rectangle src = { 0.0f, 0.0f, (float)target.texture.width, -(float)target.texture.height };
-        Rectangle dest = { (float)offsetX, (float)offsetY, (float)scaledWidth, (float)scaledHeight };
+        Rectangle dest = { (float)offset_x, (float)offset_y, (float)scaled_width, (float)scaled_height };
 
         DrawTexturePro(target.texture, src, dest, (Vector2){0, 0}, 0.0f, WHITE);
         EndDrawing();
