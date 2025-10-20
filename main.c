@@ -15,6 +15,7 @@ scaled so it fits letterbox style (see the letterbox example in raylib)
 int main() {
     int screen_width = 1920 / 2;
     int screen_height = 1080 / 2;
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(screen_width, screen_height, "FOOL");
 
     const int TEST_SIZE = 128;
