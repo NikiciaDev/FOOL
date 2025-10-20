@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "raylib.h"
+
 void generate_terrain(int* height_map, int height_map_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu) {
     memset(height_map, 0, sizeof(int) * height_map_size);
     printf("Generating terrain...\n");
@@ -38,5 +40,27 @@ void generate_terrain(int* height_map, int height_map_size, int samples, int max
 
     for(int i = 0; i < height_map_size; i++) {
         height_map[i] = (height_map[i] / actual_max) * max_height;
+    }
+}
+
+void draw_terrain(int* height_map, int height_map_size, int screen_width, int screen_height, bool debug) {
+    float xStep = (float)screen_width / (height_map_size - 1);
+
+    for (int i = 0; i < height_map_size - 1; i++) {
+        Vector2 p1 = {i * xStep, height_map[i]};
+        Vector2 p2 = {(i + 1) * xStep, height_map[i + 1]};
+        Vector2 p3 = {(i + 1) * xStep, screen_height};
+        Vector2 p4 = {i * xStep, screen_height};
+
+        DrawTriangle(p1, p3, p2, GREEN);
+        DrawTriangle(p1, p4, p3, GREEN);
+    }
+
+    for (int i = 0; i < height_map_size - 1; i++) {
+        Vector2 a = {i * xStep, height_map[i]};
+        Vector2 b = {(i + 1) * xStep, height_map[i + 1]};
+        DrawLineV(a, b, BLACK);
+
+        if(debug) DrawCircle(i * xStep, height_map[i], 2, RED);
     }
 }
