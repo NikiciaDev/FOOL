@@ -21,7 +21,7 @@ int main()
     int terrain[ARRAY_SIZE];
     generate_terrain(terrain, ARRAY_SIZE, 3, 900, &cosip, 0.5f);
 
-    Ball* crea
+    create_ball(100, 0, 10, 0, 3, 4, 1);
 
     while (!WindowShouldClose())
     {
