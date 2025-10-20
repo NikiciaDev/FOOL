@@ -3,6 +3,7 @@
 //
 
 #include "base.h"
+#include "../../globals.h"
 
 Ball createBall(float x, float y, float vx, float vy, float radius, float mass, float elasticity) {
     Ball ball;
@@ -13,7 +14,13 @@ Ball createBall(float x, float y, float vx, float vy, float radius, float mass, 
     ball.radius = radius;
     ball.mass = mass;
     ball.bounciness = elasticity;
+    ball.update = update;
+
     return ball;
+}
+
+void update() {
+
 }
 
 Rect createRect(float x, float y, float width, float height) {

@@ -11,9 +11,13 @@ typedef struct {
     float radius;
     float mass;
     float bounciness;
+
+    void (*update)();
 } Ball;
 
 Ball createBall(float x, float y, float vx, float vy, float radius, float mass, float elasticity);
+
+void update();
 
 typedef struct {
     float x, y;

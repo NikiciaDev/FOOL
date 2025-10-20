@@ -16,9 +16,9 @@ int main()
     RenderTexture2D target = LoadRenderTexture(TEXTURE_WIDTH, TEXTURE_HEIGHT);
     SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
 
-    const int ARRAY_SIZE = 256;
+    const int ARRAY_SIZE = 24;
     int terrain[ARRAY_SIZE];
-    generate_terrain(terrain, ARRAY_SIZE, 10, 900, &cosip, 0.5f);
+    generate_terrain(terrain, ARRAY_SIZE, 3, 900, &cosip, 0.5f);
 
     while (!WindowShouldClose())
     {

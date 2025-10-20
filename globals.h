@@ -6,6 +6,7 @@
 #define FOOL_GLOBALS_H
 
 extern const float G;
+extern const float FRICTION;
 
 extern const int TEXTURE_WIDTH;
 extern const int TEXTURE_HEIGHT;
