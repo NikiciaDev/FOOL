@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "util/math/mathutil.h"
 #include "util/terrain/terrainutil.h"
+#include "entity/base/ball.h"
 
 int main()
 {
@@ -19,6 +20,8 @@ int main()
     const int ARRAY_SIZE = 24;
     int terrain[ARRAY_SIZE];
     generate_terrain(terrain, ARRAY_SIZE, 3, 900, &cosip, 0.5f);
+
+    Ball* crea
 
     while (!WindowShouldClose())
     {

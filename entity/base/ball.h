@@ -15,7 +15,7 @@ typedef struct Ball {
     void (*draw)(struct Ball*);
 } Ball;
 
-Ball createBall(float x, float y, float vx, float vy, float radius, float mass, float elasticity);
+Ball create_ball(float x, float y, float vx, float vy, float radius, float mass, float elasticity);
 
 void update_ball(Ball* ball, int* terrain, int terrain_size, float delta_time);
 

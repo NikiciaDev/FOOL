@@ -7,7 +7,7 @@
 #include "../../globals.h"
 #include "../../util/terrain/terrainutil.h"
 
-Ball createBall(float x, float y, float vx, float vy, float radius, float mass, float elasticity) {
+Ball create_ball(float x, float y, float vx, float vy, float radius, float mass, float elasticity) {
     Ball ball;
     ball.x = x;
     ball.y = y;
