@@ -12,7 +12,7 @@ Ball createBall(float x, float y, float vx, float vy, float radius, float mass, 
     ball.vy = vy;
     ball.radius = radius;
     ball.mass = mass;
-    ball.elasticity = elasticity;
+    ball.bounciness = elasticity;
     return ball;
 }
 

@@ -10,7 +10,7 @@ typedef struct {
     float vx, vy;
     float radius;
     float mass;
-    float elasticity;
+    float bounciness;
 } Ball;
 
 Ball createBall(float x, float y, float vx, float vy, float radius, float mass, float elasticity);
