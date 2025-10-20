@@ -11,14 +11,14 @@ add_subdirectory(raylib)
 
 # Your source files
 add_executable(FOOL main.c
-        Entity/Entity.c
-        Entity/Entity.h
         util/random/randomutil.c
         util/random/randomutil.h
         util/terrain/terrainutil.c
         util/terrain/terrainutil.h
         util/math/mathutil.c
         util/math/mathutil.h
+        globals.h
+        entity/base/base.h
 )
 
 # Link raylib (which you built from source)

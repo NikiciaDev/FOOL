@@ -2,7 +2,7 @@
 #include "util/math/mathutil.h"
 #include "util/terrain/terrainutil.h"
 
-int main(void)
+int main()
 {
     const int TEXTURE_WIDTH = 1920;
     const int TEXTURE_HEIGHT = 1080;
@@ -18,9 +18,9 @@ int main(void)
 
     SetTargetFPS(60);
 
-    const int ARRAY_SIZE = 128;
+    const int ARRAY_SIZE = 256;
     int terrain[ARRAY_SIZE];
-    generate_terrain(terrain, ARRAY_SIZE, 6, 500, &cosip, 0.5f);
+    generate_terrain(terrain, ARRAY_SIZE, 10, 900, &cosip, 0.5f);
     while (!WindowShouldClose())
     {
         BeginTextureMode(target);

@@ -2,9 +2,9 @@
 // Created by LRieh on 19/10/2025.
 //
 
-#ifndef FOOL_RANDOM_H
-#define FOOL_RANDOM_H
+#ifndef FOOL_RANDOMUTIL_H
+#define FOOL_RANDOMUTIL_H
 
 int rand_int(int min, int max);
 
-#endif //FOOL_RANDOM_H
+#endif //FOOL_RANDOMUTIL_H

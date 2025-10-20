@@ -2,8 +2,8 @@
 // Created by LRieh on 19/10/2025.
 //
 
-#ifndef FOOL_WORLD_H
-#define FOOL_WORLD_H
+#ifndef FOOL_TERRAINUTIL_H
+#define FOOL_TERRAINUTIL_H
 
 //https://arpitbhayani.me/blogs/1d-terrain/
 
@@ -11,4 +11,4 @@ void generate_terrain(int* height_map, int height_map_size, int samples, int max
 
 void draw_terrain(int* height_map, int height_map_size, int screen_width, int screen_height, bool debug);
 
-#endif //FOOL_WORLD_H
+#endif //FOOL_TERRAINUTIL_H
