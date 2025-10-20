@@ -61,6 +61,6 @@ void draw_terrain(int* height_map, int height_map_size, int screen_width, int sc
         Vector2 b = {(i + 1) * xStep, height_map[i + 1]};
         DrawLineV(a, b, BLACK);
 
-        if(debug) DrawCircle(i * xStep, height_map[i], 2, RED);
+        if(debug) DrawCircle(i * xStep, height_map[i], 4, RED);
     }
 }

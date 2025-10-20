@@ -1,41 +1,57 @@
-#include <stdio.h>
-
 #include "raylib.h"
-#include "raymath.h"
-#include "util/terrain/terrainutil.h"
 #include "util/math/mathutil.h"
+#include "util/terrain/terrainutil.h"
 
-/*
-TODO
-What I tend to do is have a 1920 x 1080 render texture target that I render everything to,
-then last thing before the end of the frame is to draw the render target to the screen,
-scaled so it fits letterbox style (see the letterbox example in raylib)
-*/
+int main(void)
+{
+    // Initialization
+    //--------------------------------------------------------------------------------------
+    const int TEXTURE_WIDTH = 1920;
+    const int TEXTURE_HEIGHT = 1080;
+    const int WINDOW_WIDTH = 1920 / 2;
+    const int WINDOW_HEIGHT = 1080 / 2;
 
-int main() {
-    int screen_width = 1920 / 2;
-    int screen_height = 1080 / 2;
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(screen_width, screen_height, "FOOL");
+    //SetConfigFlags(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "FOOL");
 
-    const int TEST_SIZE = 128;
-    int test[TEST_SIZE];
-    generate_terrain(test, TEST_SIZE, 7, 500, &cosip, 0.5f);
-    for(int i = 0; i < TEST_SIZE; i++) {
-        printf("test[%d] = %d\n", i, test[i]);
-    }
+    RenderTexture2D target = LoadRenderTexture(TEXTURE_WIDTH, TEXTURE_HEIGHT);
 
+    SetTargetFPS(60);
 
-    while (!WindowShouldClose()) {
+    const int ARRAY_SIZE = 128;
+    int terrain[ARRAY_SIZE];
+    generate_terrain(terrain, ARRAY_SIZE, 6, 500, &cosip, 0.5f);
+    while (!WindowShouldClose())
+    {
+        BeginTextureMode(target);
+        ClearBackground(DARKBLUE);
+
+        draw_terrain(terrain, ARRAY_SIZE, TEXTURE_WIDTH, TEXTURE_HEIGHT, true);
+
+        EndTextureMode();
+
         BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawText("Raw Terrain Visualization", 10, 10, 20, DARKGRAY);
+        ClearBackground(BLACK);
+        float scaleX = (float)GetScreenWidth() / TEXTURE_WIDTH;
+        float scaleY = (float)GetScreenHeight() / TEXTURE_HEIGHT;
+        float scale = (scaleX < scaleY) ? scaleX : scaleY; // Maintain aspect ratio
 
-        draw_terrain(test, TEST_SIZE, screen_width, screen_height, false);
+        int scaledWidth = (int)(TEXTURE_WIDTH * scale);
+        int scaledHeight = (int)(TEXTURE_HEIGHT * scale);
+        int offsetX = (GetScreenWidth() - scaledWidth) / 2;
+        int offsetY = (GetScreenHeight() - scaledHeight) / 2;
 
+        // Flip vertically cuz opengl weird
+        Rectangle src = { 0.0f, 0.0f, (float)target.texture.width, -(float)target.texture.height };
+        Rectangle dest = { (float)offsetX, (float)offsetY, (float)scaledWidth, (float)scaledHeight };
+
+        DrawTexturePro(target.texture, src, dest, (Vector2){0, 0}, 0.0f, WHITE);
         EndDrawing();
     }
 
+    UnloadRenderTexture(target);
     CloseWindow();
+
     return 0;
 }
