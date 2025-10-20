@@ -45,7 +45,7 @@ int main()
 
         // Update shader uniforms
         SetShaderValue(bgShader, timeLoc, &time, SHADER_UNIFORM_FLOAT);
-        float resolution[2] = { (float)GetScreenWidth(), (float)GetScreenHeight() };
+        float resolution[2] = { (float)TEXTURE_WIDTH, (float)TEXTURE_HEIGHT };
         SetShaderValue(bgShader, resolutionLoc, resolution, SHADER_UNIFORM_VEC2);
         Vector2 mousePos = GetMousePosition();
         float mouse[2] = { mousePos.x, mousePos.y };
