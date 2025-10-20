@@ -11,44 +11,44 @@
 #include <stdio.h>
 #include <string.h>
 
-void generate_terrain(int* height_map, int height_map_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu) {
-    memset(height_map, 0, sizeof(int) * height_map_size);
+void generate_terrain(int* terrain, int terrain_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu) {
+    memset(terrain, 0, sizeof(int) * terrain_size);
     printf("Generating terrain...\n");
 
     for(int i = 0; i < samples; i++) {
         short pow2 = pow(2, i);
         if(i == 0) pow2 = 1;
 
-        for(int j = 0; j < height_map_size / pow2; j++) {
+        for(int j = 0; j < terrain_size / pow2; j++) {
             int rand = (1.f / pow(2, samples - i)) * rand_int(0, max_height);
 
             for(int k = 0; k < pow2; k++) {
-                if(j * pow2 + k >= height_map_size) break;
-                height_map[j * pow2 + k] += rand;
+                if(j * pow2 + k >= terrain_size) break;
+                terrain[j * pow2 + k] += rand;
             }
         }
     }
 
-    for(int i = 1; i < height_map_size - 1; i++) {
-        height_map[i] = interpolator(height_map[i - 1], height_map[i + 1], mu);
+    for(int i = 1; i < terrain_size - 1; i++) {
+        terrain[i] = interpolator(terrain[i - 1], terrain[i + 1], mu);
     }
 
     float actual_max = 0;
-    for(int i = 0; i < height_map_size; i++) {
-        if(height_map[i] > actual_max) actual_max = height_map[i];
+    for(int i = 0; i < terrain_size; i++) {
+        if(terrain[i] > actual_max) actual_max = terrain[i];
     }
 
-    for(int i = 0; i < height_map_size; i++) {
-        height_map[i] = (height_map[i] / actual_max) * max_height;
+    for(int i = 0; i < terrain_size; i++) {
+        terrain[i] = (terrain[i] / actual_max) * max_height;
     }
 }
 
-void draw_terrain(int* height_map, int height_map_size, bool debug) {
-    float xStep = (float)TEXTURE_WIDTH / (height_map_size - 1);
+void draw_terrain(int* terrain, int terrain_size, bool debug) {
+    float xStep = (float)TEXTURE_WIDTH / (terrain_size - 1);
 
-    for (int i = 0; i < height_map_size - 1; i++) {
-        Vector2 p1 = {i * xStep, height_map[i]};
-        Vector2 p2 = {(i + 1) * xStep, height_map[i + 1]};
+    for (int i = 0; i < terrain_size - 1; i++) {
+        Vector2 p1 = {i * xStep, terrain[i]};
+        Vector2 p2 = {(i + 1) * xStep, terrain[i + 1]};
         Vector2 p3 = {(i + 1) * xStep, TEXTURE_HEIGHT};
         Vector2 p4 = {i * xStep, TEXTURE_HEIGHT};
 
@@ -56,11 +56,11 @@ void draw_terrain(int* height_map, int height_map_size, bool debug) {
         DrawTriangle(p1, p4, p3, GREEN);
     }
 
-    for (int i = 0; i < height_map_size - 1; i++) {
-        Vector2 a = {i * xStep, height_map[i]};
-        Vector2 b = {(i + 1) * xStep, height_map[i + 1]};
+    for (int i = 0; i < terrain_size - 1; i++) {
+        Vector2 a = {i * xStep, terrain[i]};
+        Vector2 b = {(i + 1) * xStep, terrain[i + 1]};
         DrawLineV(a, b, BLACK);
 
-        if(debug) DrawCircle(i * xStep, height_map[i], 4, RED);
+        if(debug) DrawCircle(i * xStep, terrain[i], 4, RED);
     }
 }

@@ -7,8 +7,7 @@
 
 //https://arpitbhayani.me/blogs/1d-terrain/
 
-void generate_terrain(int* height_map, int height_map_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu);
+void generate_terrain(int* terrain, int terrain_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu);
 
-void draw_terrain(int* height_map, int height_map_size, bool debug);
-
+void draw_terrain(int* terrain, int terrain_size, bool debug);
 #endif //FOOL_TERRAINUTIL_H
