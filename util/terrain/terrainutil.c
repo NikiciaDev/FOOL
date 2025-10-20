@@ -18,9 +18,11 @@ void generate_terrain(int* height_map, int height_map_size, int samples, int max
         if(i == 0) pow2 = 1;
 
         for(int j = 0; j < height_map_size / pow2; j++) {
+            int rand = (1.f / pow(2, samples - i)) * rand_int(0, max_height);
+
             for(int k = 0; k < pow2; k++) {
-                if(j * pow2 + k >= height_map_size) continue;
-                height_map[j * pow2 + k] += (1.f / pow2) * rand_int(0, max_height);
+                if(j * pow2 + k >= height_map_size) break;
+                height_map[j * pow2 + k] += rand;
             }
         }
     }
