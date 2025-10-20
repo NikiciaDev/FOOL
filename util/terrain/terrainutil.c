@@ -13,7 +13,7 @@
 
 #include "../math/mathutil.h"
 
-void generate_terrain(int* terrain, int terrain_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu) {
+void generate_terrain(int* terrain, int terrain_size, int samples, int max_height, float (*interpolator)(float, float, float), float mu, int* heighest_terrain_height) {
     memset(terrain, 0, sizeof(int) * terrain_size);
     printf("Generating terrain...\n");
 
@@ -43,6 +43,8 @@ void generate_terrain(int* terrain, int terrain_size, int samples, int max_heigh
     for(int i = 0; i < terrain_size; i++) {
         terrain[i] = (terrain[i] / actual_max) * max_height;
     }
+
+    *heighest_terrain_height = max_height;
 }
 
 void draw_terrain(int* terrain, int terrain_size, bool debug) {

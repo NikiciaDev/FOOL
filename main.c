@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "raylib.h"
 #include "globals.h"
 #include "util/math/mathutil.h"
@@ -17,9 +19,11 @@ int main()
     RenderTexture2D target = LoadRenderTexture(TEXTURE_WIDTH, TEXTURE_HEIGHT);
     SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
 
-    const int ARRAY_SIZE = 24;
+    const int ARRAY_SIZE = 128;
     int terrain[ARRAY_SIZE];
-    generate_terrain(terrain, ARRAY_SIZE, 3, 900, &cosip, 0.5f);
+    int heighest_point = 0;
+    generate_terrain(terrain, ARRAY_SIZE, 7, 1000, &cosip, 0.5f, &heighest_point);
+    printf("%d\n", heighest_point);
 
     Ball ball = create_ball(100, 0, 10, 0, 8, DEFAULT_BOUNCINESS);
 
