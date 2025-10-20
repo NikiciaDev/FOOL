@@ -16,6 +16,7 @@ int main(void)
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "FOOL");
 
     RenderTexture2D target = LoadRenderTexture(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+    SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);
 
     SetTargetFPS(60);
 
